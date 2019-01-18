@@ -1,11 +1,15 @@
 enablePlugins(GatlingPlugin)
 enablePlugins(AssemblyPlugin)
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.8"
+// This forbids including Scala related libraries into the dependency
+autoScalaLibrary := false
 
 // dependencies for Gatling
-libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.3.0" % "it,runtime"
-libraryDependencies += "io.gatling" % "gatling-test-framework" % "2.3.0" % "it,runtime"
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.0.2" % Provided
+libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "3.0.2" % Provided
+
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
 
 // make '~' work (again :))
 watchSources += baseDirectory.value / "src" / "it"

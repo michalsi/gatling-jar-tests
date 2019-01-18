@@ -1,0 +1,24 @@
+---
+execution:
+  - executor: gatling
+    scenario: street_manager
+
+    concurrency: 1
+    ramp-up: 10s
+    steps: 1
+    hold-for: 1s
+
+    locations:
+      sandbox: 1
+
+modules:
+  gatling:
+    version: 3.0.2
+    properties:
+      resources-folder: ./src/test/resources
+
+
+scenarios:
+  street_manager:
+    script: target/scala-2.12/gatling-jar-tests-assembly-0.1.0-SNAPSHOT.jar
+    simulation: simulations.BasicItSimulation
